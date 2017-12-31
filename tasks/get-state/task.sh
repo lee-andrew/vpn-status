@@ -4,7 +4,9 @@ set -e
 echo "$private_key" > /tmp/id_rsa
 chmod 400 /tmp/id_rsa
 
+set +e
 result=$(ssh -i /tmp/id_rsa -o StrictHostKeyChecking=no $ssh_user@$ssh_host "curl ifconfig.co/country" | grep "United States")
+set -e
 
 pushd vpn-status-repo/status
 
