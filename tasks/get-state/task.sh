@@ -28,5 +28,5 @@ pushd vpn-status-repo/status
 popd
 
 shopt -s dotglob
-cp -r vpn-state-repo/* output
+cp -r vpn-status-repo/* output
 
