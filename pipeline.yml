@@ -18,6 +18,7 @@ resourses:
 
 - name: 10-minutes
   type: time
+  tags: [public]
   source: {interval: 10m}
 
 jobs:
