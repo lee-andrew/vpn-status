@@ -6,7 +6,7 @@ chmod 400 /tmp/id_rsa
 
 result=$(ssh -i /tmp/id_rsa -o StrictHostKeyChecking=no $ssh_user@$ssh_host "curl ifconfig.co/country" | grep "United States")
 
-pushd vpn-state-repo/status
+pushd vpn-status-repo/status
 
   if [ $result == "United States" ]; then
     if [ $(cat state) == 'off' ]; then
