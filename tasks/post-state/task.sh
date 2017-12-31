@@ -10,7 +10,7 @@ pushd vpn-status-repo/status
   if [ $state == 'off' ]; then
     echo "$private_key" > /tmp/id_rsa
     chmod 400 /tmp/id_rsa
-    $(ssh -i /tmp/id_rsa -o StrictHostKeyChecking=no $ssh_user@$ssh_host "$ssh_command")
+    ssh -i /tmp/id_rsa -o StrictHostKeyChecking=no $ssh_user@$ssh_host "$ssh_command"
   fi
 
 popd
