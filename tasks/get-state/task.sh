@@ -8,7 +8,7 @@ result=$(ssh -i /tmp/id_rsa -o StrictHostKeyChecking=no $ssh_user@$ssh_host "cur
 
 pushd vpn-status-repo/status
 
-  if [ $result == "United States" ]; then
+  if [ "$result" == "United States" ]; then
     if [ $(cat state) == 'off' ]; then
       echo 'on' > state
     fi
