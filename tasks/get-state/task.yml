@@ -1,0 +1,16 @@
+---
+platform: linux
+
+outputs:
+  - name: output
+
+image_resource:
+  type: docker-image
+  source:
+    repository: plexcloudmusic/privatebox
+
+inputs:
+  - name: vpn-status-repo
+
+run: 
+  path: vpn-status-repo/tasks/get-status/task.sh

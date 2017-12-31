@@ -1,0 +1,62 @@
+---
+resourses:
+- name: vpn-status-repo
+  type: git
+  tags: [public]
+  source:
+    uri: ((git_uri))
+    private_key: ((private_key))
+
+- name: status-trigger
+  type: git
+  tags: [public]
+  source:
+    uri: ((git_uri))
+    private_key: ((private_key))
+    paths:
+      - status/state
+
+- name: 10-minutes
+  type: time
+  source: {interval: 10m}
+
+jobs:
+  - name: Check VPN Status
+    plans:
+      - get: vpn-status-repo
+        tags: [public]
+      - get: 10-minutes
+        trigger: true
+        tags: [public]
+      - task: get-vpn-status
+        tags: [public]
+        params:
+          ssh_user: ((ssh_user))
+          ssh_host: ((ssh_host))
+          private_key: ((ssh_private_key))
+          git_user: ((git_user))
+          git_email: ((git_email))
+        file: vpn-status-repo/tasks/get-status/tasks.yml
+      - put: vpn-status-repo
+        params:
+          repository: output
+          rebase: true
+
+  - name: Notify VPN Status
+    plans:
+      - get: vpn-status-repo
+        tags: [public]
+      - get: status-trigger
+        tags: [public]
+        trigger: true
+      - task: notify-restart-vpn
+        tags: [public]
+        params:
+          ssh_user: ((ssh_user))
+          ssh_host: ((ssh_host))
+          private_key: ((ssh_private_key))
+          ssh_command: ((ssh_command))
+          discord_webhook: ((discord_webhook))
+        file: vpn-status-repo/tasks/get-status/tasks.yml
+
+   
