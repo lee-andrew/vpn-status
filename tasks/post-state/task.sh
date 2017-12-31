@@ -1,4 +1,5 @@
 #!/bin/bash
+set -ex
 
 pushd vpn-status-repo/status
 
