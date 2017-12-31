@@ -13,4 +13,4 @@ inputs:
   - name: vpn-status-repo
 
 run: 
-  path: vpn-status-repo/tasks/get-status/task.sh
+  path: vpn-status-repo/tasks/get-state/task.sh
